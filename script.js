@@ -1,16 +1,32 @@
 function precio() {
-    let precio = parseFloat(window.prompt("Dame el precio del producto"));
-    let cantidad = parseFloat(window.prompt("Dame la cantidad de productos"));
-    let importeTot = parseFloat(precio * cantidad);
+    let salir;
+    let importeTot;
+    while (!salir) {
+        let precio = parseFloat(window.prompt("Dame el precio del producto"));
+        let cantidad = parseFloat(window.prompt("Dame la cantidad de productos"));
+        importeTot = parseFloat(precio * cantidad);
+
+        if (isNaN(precio) || precio < 0) {
+            console.log("Pon un precio valido");
+        }
+
+        if (isNaN(cantidad) || cantidad <= 0) {
+            console.log("Pon una cantidad valida");
+        }
+
+        if (!isNaN(precio) && precio >= 0 && !isNaN(cantidad) && cantidad > 0) {
+            salir = true;
+        }
+    }
 
     return importeTot;
 }
 
 function descuento(importe) {
-    let descuento = importe; 
+    let descuento = importe;
 
     if (importe >= 50 && importe < 100) {
-        descuento = importe - importe * 0.05; 
+        descuento = importe - importe * 0.05;
     }
     else if (importe >= 100 && importe < 200) {
         descuento = importe - importe * 0.10;
@@ -40,7 +56,7 @@ let menor = Infinity;
 
 while (!salir) {
     precioFinal = parseFloat(IVA(descuento(precio())));
-    
+
     sumaPrecios += precioFinal;
 
     if (precioFinal < menor) {
@@ -49,7 +65,7 @@ while (!salir) {
     if (precioFinal > mayor) {
         mayor = precioFinal;
     }
-    
+
     let respuesta = window.confirm("¿Volver a realizar todo?");
 
     if (respuesta) {
